@@ -19,25 +19,35 @@ def get_an_accept_payment_page(apiLoginId, apiTransactionKey, hostedPaymentIFram
     setting2.settingName = apicontractsv1.settingNameEnum.hostedPaymentOrderOptions
     setting2.settingValue = "{\"show\": false}"
 
-    settings3 = apicontractsv1.settingType()
-    settings3.settingName =apicontractsv1.settingNameEnum.hostedPaymentIFrameCommunicatorUrl
-    settings3.settingValue = "{\"url\": \"" + hostedPaymentIFrameCommunicatorUrl + "\"}"
+    setting3 = apicontractsv1.settingType()
+    setting3.settingName = apicontractsv1.settingNameEnum.hostedPaymentIFrameCommunicatorUrl
+    setting3.settingValue = "{\"url\": \"" + hostedPaymentIFrameCommunicatorUrl + "\"}"
 
-    settings4 = apicontractsv1.settingType()
-    settings4.settingName = apicontractsv1.settingNameEnum.hostedPaymentBillingAddressOptions
-    settings4.settingValue = "{\"show\": false}"
+    setting4 = apicontractsv1.settingType()
+    setting4.settingName = apicontractsv1.settingNameEnum.hostedPaymentBillingAddressOptions
+    setting4.settingValue = "{\"show\": false}"
 
-    settings5 = apicontractsv1.settingType()
-    settings5.settingName = apicontractsv1.settingNameEnum.hostedPaymentReturnOptions
-    settings5.settingValue = "{\"showReceipt\": false,\"url\":\"" + hostedPaymentIFrameCommunicatorUrl + "\",\"urlText\":\"Continue\",\"cancelUrlText\":\"Cancel\"}"
+    setting5 = apicontractsv1.settingType()
+    setting5.settingName = apicontractsv1.settingNameEnum.hostedPaymentReturnOptions
+    setting5.settingValue = "{\"showReceipt\": false,\"url\":\"" + hostedPaymentIFrameCommunicatorUrl + "\",\"urlText\":\"Continue\",\"cancelUrlText\":\"Cancel\"}"
+
 
     settings = apicontractsv1.ArrayOfSetting()
     settings.setting.append(setting1)
     settings.setting.append(setting2)
+    settings.setting.append(setting3)
+    settings.setting.append(setting4)
+    settings.setting.append(setting5)
 
     transactionrequest = apicontractsv1.transactionRequestType()
     transactionrequest.transactionType = "authCaptureTransaction"
     transactionrequest.amount = 99
+
+    if customerId is not None:
+       if customerId != '':
+         custprofile = apicontractsv1.customerProfilePaymentType()
+         custprofile.customerProfileId = customerId
+         transactionrequest.profile =custprofile
 
     paymentPageRequest = apicontractsv1.getHostedPaymentPageRequest()
     paymentPageRequest.merchantAuthentication = merchantAuth
