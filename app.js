@@ -139,9 +139,12 @@ function loadpage()
   else
   {
       //For invalid product type
+	   if(document.getElementById("invalidPage")!=null)
+	  {
     document.getElementById("invalidPage").innerHTML="";
        document.getElementById("invalidPage").innerHTML="Product Type not Found";
       document.getElementById("invalidProduct").style.display="block";
+	  }
   }
 }
 
