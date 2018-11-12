@@ -926,9 +926,9 @@ CommunicationHandler.onReceiveCommunication = function (argument) {
               document.getElementById("cartHosted").style.display="none";
               document.getElementById("hostedPayment").style.display="none";
               //To append current time and date in confirmation page
-              var currentdate = new Date();
+              var currentdate = new Date(transResponse.dateTime+ ' UTC');
               document.getElementById("orderIDHosted").innerHTML=transResponse.transId;
-              document.getElementById("orderDateHosted").innerHTML=transResponse.dateTime;
+              document.getElementById("orderDateHosted").innerHTML=currentdate;
               document.getElementById("confirmDivHosted").classList.add("hostedPage");
               document.getElementById("confirmDivHosted").style.display="block";
             }
